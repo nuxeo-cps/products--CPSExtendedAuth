@@ -1,3 +1,9 @@
+======
+README
+======
+
+:Revision: $Id$
+
 
 CPSExtendedAuth replaces Zope's CookieCrumbler. It can be used with CPS >= 3.4
 out-of-the-box. Since no modifications of the user folder are performed, all
@@ -21,3 +27,16 @@ The authentication is stored on the server in RAM. It contains information about
 the user's session expires when the RAM cache is cleaned up (see the RAM cache
 manager's 'Cleanup interval' option).
 
+
+Authors
+=======
+
+Jean-Marc Orliaguet <jmo@chalmers.se>
+M.-A. Darche <madarche@nuxeo.com>
+
+
+
+.. Local Variables:
+.. mode: rst
+.. End:
+.. vim: set filetype=rst:

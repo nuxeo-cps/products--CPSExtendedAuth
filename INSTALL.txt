@@ -1,6 +1,9 @@
-
+============
 INSTALLATION
-------------
+============
+
+:Revision: $Id$
+
 
 - Import one of the provided profiles:
 
@@ -11,3 +14,8 @@ INSTALLATION
 - Delete the 'cookie_authentication' object in the root of the portal.
 
 
+
+.. Local Variables:
+.. mode: rst
+.. End:
+.. vim: set filetype=rst:
