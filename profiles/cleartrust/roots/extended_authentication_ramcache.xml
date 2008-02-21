@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<object name="extended_authentication_ramcache" meta_type="RAM Cache Manager">
+ <property name="title">Extended authentication RAM Cache</property>
+ <property name="cleanup_interval">3600</property>
+ <property name="max_age">3600</property>
+ <property name="request_vars"/>
+ <property name="threshold">3000</property>
+</object>

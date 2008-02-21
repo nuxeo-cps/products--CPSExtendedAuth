@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<import-steps>
+ <import-step id="krb5_authentication"
+              version="20060313-01"
+              handler="Products.CPSKrb5Auth.exportimport.importKrb5Auth"
+              title="Krb5 Authentication">
+  <dependency step="toolset"/>
+  Import krb5 auth settings
+ </import-step>
+</import-steps>

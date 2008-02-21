@@ -1,0 +1,13 @@
+
+INSTALLATION
+------------
+
+- Import one of the provided profiles:
+
+  * `CPS authentication without Cookie Crumbler`
+  * `CPS authentication using Kerberos 5`
+  * `CPS authentication using RSA Cleartrust`
+
+- Delete the 'cookie_authentication' object in the root of the portal.
+
+

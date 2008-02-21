@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<roots>
+ <object name="extended_authentication_ramcache" meta_type="RAM Cache Manager"/>
+</roots>

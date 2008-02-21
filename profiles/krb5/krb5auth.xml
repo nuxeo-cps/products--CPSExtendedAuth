@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<object name="krb5_authentication" meta_type="CPS Krb5 Auth">
+ <property name="title">Kerberos5 authentication</property>
+ <object name="auth_cache" meta_type="RAM Cache Manager"/>
+ <cache-manager name="auth_cache" />
+</object>

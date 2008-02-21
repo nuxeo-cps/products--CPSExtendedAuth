@@ -1,0 +1,21 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:cps="http://namespaces.nuxeo.org/cps"
+    xmlns:five="http://namespaces.zope.org/five">
+
+  <adapter
+      factory=".exportimport.ExtendedAuthToolXMLAdapter"
+      provides="Products.GenericSetup.interfaces.IBody"
+      for=".interfaces.ICpsExtendedAuth
+           Products.GenericSetup.interfaces.ISetupEnviron"
+      />
+
+  <five:traversable
+      class=".baseauth.BaseAuth"
+      />
+
+  <five:traversable
+      class=".cleartrustauth.CleartrustAuth"
+      />
+
+</configure>

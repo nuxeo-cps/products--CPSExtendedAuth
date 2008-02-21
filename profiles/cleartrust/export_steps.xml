@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<export-steps>
+ <export-step id="extended_authentication"
+              handler="Products.CPSExtendedAuth.exportimport.exportExtendedAuthTool"
+              title="Extended Authentication Tool (no-cookie, Kerberos 5, RSA Cleartrust, etc.)">
+ </export-step>
+</export-steps>

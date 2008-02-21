@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<export-steps>
+ <export-step id="krb5auth"
+              handler="Products.CPSKrb5Auth.exportimport.exportKrb5Auth"
+              title="Krb5 Authentication">
+  Export krb5 authentication settings
+ </export-step>
+</export-steps>

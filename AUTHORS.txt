@@ -1,0 +1,9 @@
+
+=======
+AUTHORS
+=======
+
+Jean-Marc Orliaguet <jmo@chalmers.se>
+M.-A. Darche <madarche@nuxeo.com>
+
+
