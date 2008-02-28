@@ -77,7 +77,7 @@ class CleartrustAuth(BaseAuth):
         logger.debug("request.environ = %s" % request.environ)
         logger.debug("ct_session_a = %s" % ct_session_a)
         logger.debug("ct_session = %s" % ct_session)
-        if ct_session_a is None or ct_session is None:
+        if ct_session is None:
             logger.debug("No ClearTrust session: not authorizing")
             return
 
