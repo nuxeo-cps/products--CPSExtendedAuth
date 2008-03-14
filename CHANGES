@@ -6,7 +6,7 @@ New features
 -
 Bug fixes
 ~~~~~~~~~
--
+- Fixed the fact that the tool XML configuration file was never used.
 New internal features
 ~~~~~~~~~~~~~~~~~~~~~
 - First package

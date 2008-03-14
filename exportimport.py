@@ -43,9 +43,16 @@ from Products.GenericSetup.interfaces import IBody
 from Products.GenericSetup.interfaces import ISetupEnviron
 from Products.CPSExtendedAuth.interfaces import ICpsExtendedAuth
 
-NAME = 'extended_auth'
-
+# This variable is here to get and configure the tool,
+# so it must match the ID of the tool.
 TOOL = 'extended_authentication'
+
+# This variable is used by the importObjects method as the importer.name
+# which is then used to compute the filename. So, since the XML configuration
+# file is "extended_authentication.xml",
+# NAME should be "extended_authentication".
+# cf. GenericSetup.utils.importObjects()
+NAME = 'extended_authentication'
 
 def exportExtendedAuthTool(context):
     """Export portlet tool and portlets a set of XML files.
@@ -94,7 +101,7 @@ class ExtendedAuthToolXMLAdapter(XMLAdapterBase, CPSObjectManagerHelpers,
     def _importNode(self, node):
         """Import the object from the DOM node.
         """
-        self._logger.info("LLLLLLLLLL ----")
+        self._logger.info("...")
         if self.environ.shouldPurge():
             self._purgeProperties()
             self._purgeObjects()
@@ -104,6 +111,4 @@ class ExtendedAuthToolXMLAdapter(XMLAdapterBase, CPSObjectManagerHelpers,
         self._initCacheableManagerAssociation(node)
         self._logger.info("Tool %s imported." % TOOL)
 
-     # Is this setting really necessary?
-#    node = property(_exportNode, _importNode)
 
