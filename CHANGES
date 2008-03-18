@@ -7,6 +7,7 @@ New features
 Bug fixes
 ~~~~~~~~~
 - Fixed the fact that the tool XML configuration file was never used.
+- Hardened logout.
 New internal features
 ~~~~~~~~~~~~~~~~~~~~~
 - First package

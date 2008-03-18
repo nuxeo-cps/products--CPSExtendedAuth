@@ -139,10 +139,11 @@ class CleartrustAuth(BaseAuth):
     def expireSession(self, request):
         log_key = LOG_KEY + '.expireSession'
         logger = logging.getLogger(log_key)
+        logger.debug("...")
         BaseAuth.expireSession(self, request)
-        request.RESPONSE.expireCookie(CLEARTRUST_COOKIE_SESSION_A, , path='/')
-        request.RESPONSE.expireCookie(CLEARTRUST_COOKIE_SESSION, path='/')
-        logger.debug("Expire session")
+        request.RESPONSE.setCookie(CLEARTRUST_COOKIE_SESSION_A, '%20')
+        request.RESPONSE.setCookie(CLEARTRUST_COOKIE_SESSION, '%20')
+        logger.debug("DONE")
 
  
 InitializeClass(CleartrustAuth)

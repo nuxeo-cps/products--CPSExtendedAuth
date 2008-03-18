@@ -32,7 +32,8 @@ from interfaces import ICpsExtendedAuth
 
 SESSION_ID_VAR = '_cpsauth_id'
 
-logger = logging.getLogger('CPSExtendedAuth.baseauth')
+LOG_KEY = 'CPSExtendedAuth.baseauth'
+logger = logging.getLogger(LOG_KEY)
 
 class BaseAuth(Folder, Cacheable):
     """Authenticates users against the User Folder without exposing the
@@ -109,7 +110,10 @@ class BaseAuth(Folder, Cacheable):
 
     security.declarePublic('expireSession')
     def expireSession(self, request):
+        log_key = LOG_KEY + '.expireSession'
+        logger = logging.getLogger(log_key)
         keyset = self._computeCacheKey(request, create=False)
+        logger.debug("keyset : %s", keyset)
         # Clearing cache entry value. A better thing would have been to
         # invalidate the cache entry itself, but the Cacheable API
         # doesn't seem to allow this.
@@ -117,7 +121,7 @@ class BaseAuth(Folder, Cacheable):
         # This is a call to the potential SSO API
         self.expireAuthorization(keyset)
         request.RESPONSE.expireCookie(SESSION_ID_VAR)
-        logger.debug("Expire session %s", keyset)
+        logger.debug("DONE")
 
     # Extensions
 
@@ -166,9 +170,10 @@ class BaseAuth(Folder, Cacheable):
     def _computeCacheKey(self, request, create=False):
         """Compute the cache key set based on host info and session id."""
         sessionId = self._getSessionId(request, create)
-        host = request.get('HTTP_X_FORWARDED_FOR')
-        if not host:
-            host = request.get('REMOTE_ADDR')
+        host = request.get('REMOTE_ADDR')
+#        host = request.get('HTTP_X_FORWARDED_FOR')
+#        if not host:
+#            host = request.get('REMOTE_ADDR')
         site = self._getAndCacheSiteUrl(request)
         return {
             'id': sessionId,
