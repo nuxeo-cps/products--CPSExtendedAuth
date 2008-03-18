@@ -110,6 +110,11 @@ class BaseAuth(Folder, Cacheable):
     security.declarePublic('expireSession')
     def expireSession(self, request):
         keyset = self._computeCacheKey(request, create=False)
+        # Clearing cache entry value. A better thing would have been to
+        # invalidate the cache entry itself, but the Cacheable API
+        # doesn't seem to allow this.
+        self.ZCacheable_set(None, keywords=keyset)
+        # This is a call to the potential SSO API
         self.expireAuthorization(keyset)
         request.RESPONSE.expireCookie(SESSION_ID_VAR)
         logger.debug("Expire session %s", keyset)
