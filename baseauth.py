@@ -26,7 +26,7 @@ from ZPublisher import BeforeTraverse
 
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from Products.Sessions.BrowserIdManager import getNewBrowserId
-from Products.CMFCore.utils import getToolByName
+from Products.CMFCore.utils import getToolByName, UniqueObject
 
 from interfaces import ICpsExtendedAuth
 
@@ -35,7 +35,7 @@ SESSION_ID_VAR = '_cpsauth_id'
 LOG_KEY = 'CPSExtendedAuth.baseauth'
 logger = logging.getLogger(LOG_KEY)
 
-class BaseAuth(Folder, Cacheable):
+class BaseAuth(UniqueObject, Folder, Cacheable):
     """Authenticates users against the User Folder without exposing the
     password in a cookie or in RAM.
 
@@ -43,17 +43,31 @@ class BaseAuth(Folder, Cacheable):
     inheriting from this class without exposing the password in a cookie
     or in RAM.
     """
-    meta_type = 'CPS Extended Auth'
-
     implements(ICpsExtendedAuth)
-
-    name_req_variable = '__ac_name'
-    pw_req_variable = '__ac_password'
+    meta_type = 'CPS Extended Auth'
 
     manage_options = (
         Folder.manage_options +
         Cacheable.manage_options
     )
+
+    _properties = (
+        {'id': 'cookie_domain',
+         'type': 'string',
+         'mode': 'w',
+         'label': "Cookie domain (Optional)",
+        },
+        {'id': 'use_x_forwarded_for',
+         'type': 'boolean',
+         'mode': 'w',
+         'label': "Use X_FORWARDED_FOR env variable for computing login keys",
+        },
+    )
+
+    cookie_domain = ''
+    use_x_forwarded_for = False
+    name_req_variable = '__ac_name'
+    pw_req_variable = '__ac_password'
 
     security = ClassSecurityInfo()
 
@@ -171,9 +185,10 @@ class BaseAuth(Folder, Cacheable):
         """Compute the cache key set based on host info and session id."""
         sessionId = self._getSessionId(request, create)
         host = request.get('REMOTE_ADDR')
-#        host = request.get('HTTP_X_FORWARDED_FOR')
-#        if not host:
-#            host = request.get('REMOTE_ADDR')
+        if self.getProperty('use_x_forwarded_for'):
+            host = request.get('HTTP_X_FORWARDED_FOR')
+            if not host:
+                host = request.get('REMOTE_ADDR')
         site = self._getAndCacheSiteUrl(request)
         return {
             'id': sessionId,

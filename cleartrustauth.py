@@ -42,9 +42,8 @@ class CleartrustAuth(BaseAuth):
     """Authenticates users against RSA ClearTrust through the checking
     of the HTTP headers without exposing the password in a cookie or in RAM.
     """
-    meta_type = 'CPS Cleartrust Auth'
-
     implements(ICpsExtendedAuth)
+    meta_type = 'CPS Cleartrust Auth'
 
     security = ClassSecurityInfo()
 
@@ -141,13 +140,19 @@ class CleartrustAuth(BaseAuth):
         logger = logging.getLogger(log_key)
         logger.debug("...")
         BaseAuth.expireSession(self, request)
-        # Those cookies removals (through expiration) will only
-        # work if the cookies were emitted from the same host as the CPS host.
-        # But this is likely to not be the case most of the time for SSO setups
-        # where one usually sets cookies for host .mydomain.com, ie the full
-        # domain, while the CPS host is www.mydomain.com.
-        request.RESPONSE.expireCookie(CLEARTRUST_COOKIE_SESSION_A)
-        request.RESPONSE.expireCookie(CLEARTRUST_COOKIE_SESSION)
+        # Those cookies removals (through expiration) will only work if the
+        # cookies are expired with the same domain that was used for their
+        # setting.
+        # Most of the time for SSO setups cookies are set for host
+        # .mydomain.net, ie the full domain, while the CPS host is
+        # www.mydomain.net. Hence the need to set the "cookie_domain" property
+        # in the extended_authentication tool.
+        kw = {}
+        cookie_domain = self.getProperty('cookie_domain')
+        if cookie_domain:
+            kw['domain'] = cookie_domain
+        request.RESPONSE.expireCookie(CLEARTRUST_COOKIE_SESSION_A, **kw)
+        request.RESPONSE.expireCookie(CLEARTRUST_COOKIE_SESSION, **kw)
         logger.debug("DONE")
 
  

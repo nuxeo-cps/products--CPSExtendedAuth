@@ -3,7 +3,8 @@ Requires
 -
 New features
 ~~~~~~~~~~~~
--
+- Now using 2 new properties "cookie_domain" and "use_x_forwarded_for" for
+  better adaptation to production contexts.
 Bug fixes
 ~~~~~~~~~
 - Fixed the fact that the tool XML configuration file was never used.
