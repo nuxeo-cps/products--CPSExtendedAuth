@@ -183,6 +183,9 @@ class BaseAuth(UniqueObject, Folder, Cacheable):
 
     def _computeCacheKey(self, request, create=False):
         """Compute the cache key set based on host info and session id."""
+        log_key = LOG_KEY + '._computeCacheKey'
+        logger = logging.getLogger(log_key)
+        logger.debug("create = %s" % create)
         sessionId = self._getSessionId(request, create)
         host = request.get('REMOTE_ADDR')
         if self.getProperty('use_x_forwarded_for'):
@@ -197,10 +200,16 @@ class BaseAuth(UniqueObject, Folder, Cacheable):
             }
 
     def _getSessionId(self, request, create=False):
+        log_key = LOG_KEY + '._getSessionId'
+        logger = logging.getLogger(log_key)
         sessionId = request.cookies.get(SESSION_ID_VAR)
+        logger.debug("create = %s, sessionId = %s" % (create, sessionId))
         if create and sessionId is None:
             sessionId = self._createNewSessionId()
-            request.RESPONSE.setCookie(SESSION_ID_VAR, sessionId)
+            # Making sure the cookie applies from the root path,
+            # because the first authentication may have come
+            # from a sub-path such as /workspaces/somewhere-below
+            request.RESPONSE.setCookie(SESSION_ID_VAR, sessionId, path='/')
         return sessionId
 
     def _createNewSessionId(self):
