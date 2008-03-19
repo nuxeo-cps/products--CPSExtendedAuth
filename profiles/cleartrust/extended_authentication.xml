@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
 <object name="extended_authentication" meta_type="CPS Cleartrust Auth">
- <property name="title">Extended authentication</property>
  <cache-manager name="extended_authentication_ramcache"/>
 </object>
