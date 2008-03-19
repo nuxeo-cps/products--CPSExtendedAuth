@@ -141,8 +141,13 @@ class CleartrustAuth(BaseAuth):
         logger = logging.getLogger(log_key)
         logger.debug("...")
         BaseAuth.expireSession(self, request)
+        # Those cookies removals (through expiration) will only
+        # work if the cookies were emitted from the same host as the CPS host.
+        # But this is likely to not be the case most of the time for SSO setups
+        # where one usually sets cookies for host .mydomain.com, ie the full
+        # domain, while the CPS host is www.mydomain.com.
         request.RESPONSE.expireCookie(CLEARTRUST_COOKIE_SESSION_A)
-        request.RESPONSE.(CLEARTRUST_COOKIE_SESSION)
+        request.RESPONSE.expireCookie(CLEARTRUST_COOKIE_SESSION)
         logger.debug("DONE")
 
  
