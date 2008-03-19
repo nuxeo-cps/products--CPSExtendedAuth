@@ -24,7 +24,6 @@ from Globals import InitializeClass, HTMLFile
 from OFS.Folder import Folder
 from ZPublisher import BeforeTraverse
 
-from Products.Sessions.BrowserIdManager import getNewBrowserId
 from Products.CMFCore.utils import getToolByName
 
 from baseauth import BaseAuth
