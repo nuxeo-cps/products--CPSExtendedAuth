@@ -12,6 +12,8 @@ Bug fixes
   /workspaces/somewhere-below.
 - Fixed the fact that the tool XML configuration file was never used.
 - Hardened logout.
+- Taking advantage of the new portal_membership.createMemberAreaUnrestricted
+  method during the login phase.
 New internal features
 ~~~~~~~~~~~~~~~~~~~~~
 - First package

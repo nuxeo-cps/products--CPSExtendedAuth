@@ -125,12 +125,16 @@ class CleartrustAuth(BaseAuth):
             logger.debug("No ClearTrust uid: not authorizing")
             return
 
-        aclu = getToolByName(self, 'acl_users')
+        aclu = portal.acl_users
         ac = '%s %s' % (aclu.getTrustedAuthString(), ct_uid)
         logger.debug("Put \"%s\" in the cache." % ac)
         self.ZCacheable_set(ac, keywords=keyset)
         self.storeAuthorization(keyset, ac)
         request._auth = ac
+        logger.debug("Checking if creation of a member area "
+                     "for \"%s\" is needed ..." % ct_uid)
+        portal.portal_membership.createMemberAreaUnrestricted(member_id=ct_uid)
+        logger.debug("Member area checking and creation DONE")
 
 
     security.declarePublic('expireSession')
@@ -154,5 +158,5 @@ class CleartrustAuth(BaseAuth):
         request.RESPONSE.expireCookie(CLEARTRUST_COOKIE_SESSION, **kw)
         logger.debug("DONE")
 
- 
+
 InitializeClass(CleartrustAuth)
