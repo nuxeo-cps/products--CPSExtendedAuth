@@ -3,17 +3,10 @@ Requires
 -
 New features
 ~~~~~~~~~~~~
-- Now using 2 new properties "cookie_domain" and "use_x_forwarded_for" for
-  better adaptation to production contexts.
+-
 Bug fixes
 ~~~~~~~~~
-- Made sure the CPS session cookie applies from the root path, because the first
-  authentication may have come from a sub-path such as
-  /workspaces/somewhere-below.
-- Fixed the fact that the tool XML configuration file was never used.
-- Hardened logout.
-- Taking advantage of the new portal_membership.createMemberAreaUnrestricted
-  method during the login phase.
+-
 New internal features
 ~~~~~~~~~~~~~~~~~~~~~
-- First package
+- 
