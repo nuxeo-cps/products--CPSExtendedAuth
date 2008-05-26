@@ -10,12 +10,16 @@
            Products.GenericSetup.interfaces.ISetupEnviron"
       />
 
-  <five:traversable
-      class=".baseauth.BaseAuth"
-      />
+  <subscriber
+    for="Products.CPSExtendedAuth.interfaces.ICpsExtendedAuth
+    zope.app.container.interfaces.IObjectAddedEvent"
+    handler="Products.CPSExtendedAuth.baseauth.registerHook"
+    />
 
-  <five:traversable
-      class=".cleartrustauth.CleartrustAuth"
-      />
+  <subscriber
+    for="Products.CPSExtendedAuth.interfaces.ICpsExtendedAuth
+    zope.app.container.interfaces.IObjectRemovedEvent"
+    handler="Products.CPSExtendedAuth.baseauth.unregisterHook"
+    />
 
 </configure>

@@ -74,6 +74,10 @@ class BaseAuth(UniqueObject, Folder, Cacheable):
     def __call__(self, container, request):
         """Update the request with _auth information.
         """
+        log_key = LOG_KEY + '.__call__'
+        logger = logging.getLogger(log_key)
+        logger.debug("...")
+
         # Is the request authenticating?
         password = request.get(self.pw_req_variable)
         create_session = False
@@ -238,6 +242,26 @@ class BaseAuth(UniqueObject, Folder, Cacheable):
 InitializeClass(BaseAuth)
 
 
+def registerHook(ob, event):
+    logger.debug("...")
+    tool_id = event.newName
+    handle = ob.meta_type + '/' + tool_id
+    container = aq_inner(aq_parent(ob))
+    nc = BeforeTraverse.NameCaller(tool_id)
+    logger.debug("handle = %s, container = %s, nc = %s" % (handle, container, nc))
+    BeforeTraverse.registerBeforeTraverse(container, nc, handle)
+    logger.debug("Registered BeforeTraverse hook")
+
+def unregisterHook(ob, event):
+    logger.debug("...")
+    tool_id = event.oldName
+    handle = ob.meta_type + '/' + tool_id
+    container = aq_inner(aq_parent(ob))
+    logger.debug("handle = %s, container = %s" % (handle, container))
+    BeforeTraverse.unregisterBeforeTraverse(container, handle)
+    logger.debug("Unregistered BeforeTraverse hook")
+
+
 manage_addExtendedAuthForm = PageTemplateFile('zmi/addExtendedAuth', globals(),
                                               __name__='addExtendedAuth')
 
@@ -257,17 +281,4 @@ def manage_addExtendedAuth(self, id, auth_type, REQUEST=None):
     if REQUEST is not None:
         return self.manage_main(self, REQUEST)
 
-
-def registerHook(ob, event):
-    handle = ob.meta_type + '/' + ob.getId()
-    container = aq_inner(aq_parent(ob))
-    nc = BeforeTraverse.NameCaller(ob.getId())
-    BeforeTraverse.registerBeforeTraverse(container, nc, handle)
-    logger.debug("Registered BeforeTraverse hook")
-
-def unregisterHook(ob, event):
-    handle = ob.meta_type + '/' + ob.getId()
-    container = aq_inner(aq_parent(ob))
-    BeforeTraverse.unregisterBeforeTraverse(container, handle)
-    logger.debug("Unregistered BeforeTraverse hook")
 

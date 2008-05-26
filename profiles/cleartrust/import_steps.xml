@@ -3,6 +3,7 @@
  <import-step id="extended_authentication" version="20080208-01"
               handler="Products.CPSExtendedAuth.exportimport.importExtendedAuthTool"
               title="Extended Authentication Tool (no-cookie, Kerberos 5, RSA Cleartrust, etc.)">
+  <dependency step="toolset"/>
   <dependency step="various"/>
  </import-step>
 </import-steps>
