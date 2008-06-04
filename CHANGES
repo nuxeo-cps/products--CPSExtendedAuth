@@ -6,11 +6,7 @@ New features
 -
 Bug fixes
 ~~~~~~~~~
-- Added back the required subscriber directives in configure.zcml (which got
-  somehow removed) as they are what calls the registerHook and unregisterHook
-  method.
-- Made the registerHook and unregisterHook methods use the good tool_id
-  identifiers to register the before traverse hooks.
+-
 New internal features
 ~~~~~~~~~~~~~~~~~~~~~
 - 
