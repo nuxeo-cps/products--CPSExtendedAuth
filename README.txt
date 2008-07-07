@@ -5,7 +5,7 @@ README
 :Revision: $Id$
 
 
-CPSExtendedAuth replaces Zope's CookieCrumbler. It can be used with CPS >= 3.4
+CPSExtendedAuth replaces Zope's CookieCrumbler. It can be used with CPS >= 3.4.4
 out-of-the-box. Since no modifications of the user folder are performed, all
 CPSUserFolder features are available by default (group management, role
 blocking, directory backends, ...)
