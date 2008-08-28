@@ -1,4 +1,24 @@
 ===========================================================
+Package: CPSExtendedAuth 0.1.2
+===========================================================
+First release built by: madarche at: 2008-08-28T09:44:57
+SVN Tag: https://svn.nuxeo.org/pub/CPS3/products/CPSExtendedAuth/tags/0.1.2
+Build from: https://svn.nuxeo.org/pub/CPS3/products/CPSExtendedAuth/trunk@52919
+
+Requires
+~~~~~~~~
+-
+New features
+~~~~~~~~~~~~
+-
+Bug fixes
+~~~~~~~~~
+- Fixed errors in the README.txt file.
+New internal features
+~~~~~~~~~~~~~~~~~~~~~
+- 
+
+===========================================================
 Package: CPSExtendedAuth 0.1.1
 ===========================================================
 First release built by: madarche at: 2008-06-04T17:53:39
