@@ -84,6 +84,9 @@ class CleartrustAuth(BaseAuth):
             self.expireSession(request)
             return
 
+        # The username, sent in the CT_REMOTE_USER header, is only sent by
+        # ClearTrust in the first request. This happens only once and thus
+        # should not be missed.
         ct_uid = request.environ.get(CLEARTRUST_HEADER_UID)
         logger.debug("ct_uid = %s" % ct_uid)
         create_session = False
