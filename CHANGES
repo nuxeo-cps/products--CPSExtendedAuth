@@ -6,9 +6,7 @@ New features
 -
 Bug fixes
 ~~~~~~~~~
-- Added information in the code that the username, sent in the CT_REMOTE_USER
-  header, is only sent by ClearTrust in the first request. This happens only
-  once and thus should not be missed.
+-
 New internal features
 ~~~~~~~~~~~~~~~~~~~~~
 - 
