@@ -1,4 +1,21 @@
 ===========================================================
+Package: CPSExtendedAuth 0.1.4
+===========================================================
+First release built by: gracinet at: 2010-03-14T16:05:07
+Requires
+~~~~~~~~
+-
+New features
+~~~~~~~~~~~~
+-
+Bug fixes
+~~~~~~~~~
+- First hgbundler managed release
+New internal features
+~~~~~~~~~~~~~~~~~~~~~
+- 
+
+===========================================================
 Package: CPSExtendedAuth 0.1.3
 ===========================================================
 First release built by: gracinet at: 2009-08-21T15:05:35
