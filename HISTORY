@@ -1,4 +1,21 @@
 ===========================================================
+Package: CPSExtendedAuth 0.1.5
+===========================================================
+First release built by: gracinet at: 2010-07-23T02:22:39
+Requires
+~~~~~~~~
+-
+New features
+~~~~~~~~~~~~
+-
+Bug fixes
+~~~~~~~~~
+- Should support unicode
+New internal features
+~~~~~~~~~~~~~~~~~~~~~
+- 
+
+===========================================================
 Package: CPSExtendedAuth 0.1.4
 ===========================================================
 First release built by: gracinet at: 2010-03-14T16:05:07
