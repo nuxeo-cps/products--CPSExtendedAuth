@@ -121,8 +121,25 @@ class BaseAuth(UniqueObject, Folder, Cacheable):
             self.ZCacheable_set(ac, keywords=keyset)
             self.storeAuthorization(keyset, ac)
             request._auth = ac
+
+            self._setUserForAccessLog()
         else:
             request.RESPONSE.expireCookie(SESSION_ID_VAR)
+
+    @classmethod
+    def _setUserForAccessLog(self, request, username):
+        """Do all necessary actions so that the username appears in access log.
+        """
+        # Medusa does the logging, from basic auth header
+        # See #2273 (and code for log() in ZServer.medusa.http_server)
+        try:
+            # Put the full-arm latex glove on now...
+            medusa_headers = response.stdout._request._header_cache
+        except AttributeError:
+            logger.error('Could set username in access log')
+            pass
+        else:
+            medusa_headers['authorization'] = 'Basic ' + b2a_base64(username)
 
     # Public API
 
